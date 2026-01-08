@@ -92,7 +92,7 @@ export default function Navbar() {
           <>
             <NavbarItem>
               <NavLink
-                to={'/regitser'}
+                to={'/register'}
                 className={({ isActive }) =>
                   `inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-shadow focus:outline-none shadow-sm ${
                     isActive
