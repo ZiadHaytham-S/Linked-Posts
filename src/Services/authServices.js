@@ -7,7 +7,7 @@ export async function userDataApi() {
                 token : localStorage.getItem('token')
             }
         })
-        console.log(data);
+        
         return data
         
     } catch (err){

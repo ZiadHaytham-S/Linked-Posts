@@ -55,13 +55,13 @@ export default function CreatePost({ callback, setIsUpdating, isUpdating, post }
   }
 
   return (
-    <div className="bg-white relative rounded-md shadow-md py-3 px-3 my-5 overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 relative rounded-md shadow-md py-3 px-3 my-5 overflow-hidden">
       <form onSubmit={createPost}>
         <textarea
           value={postBody}
           onChange={(e) => setPostBody(e.target.value)}
           placeholder="Create Post, What's on your mind..."
-          className="bg-gray-100 border w-full resize-none rounded-md p-4"
+          className="bg-gray-100 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 border border-gray-200 dark:border-gray-600 w-full resize-none rounded-md p-4"
           rows={5}
         ></textarea>
 
@@ -78,7 +78,7 @@ export default function CreatePost({ callback, setIsUpdating, isUpdating, post }
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6 absolute top-4 end-4 cursor-pointer"
+              className="size-6 absolute top-4 end-4 cursor-pointer text-gray-700 dark:text-gray-300"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
@@ -86,7 +86,7 @@ export default function CreatePost({ callback, setIsUpdating, isUpdating, post }
         )}
 
         <div className="flex justify-between items-center">
-          <label className="cursor-pointer hover:text-blue-500 hover:duration-300 flex gap-1">
+          <label className="cursor-pointer hover:text-blue-500 dark:hover:text-blue-400 hover:duration-300 flex gap-1 text-gray-700 dark:text-gray-300">
             <input onChange={handelImage} type="file" className="border hidden" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ export default function CreatePost({ callback, setIsUpdating, isUpdating, post }
       </form>
 
       {loading && (
-        <div className="absolute flex justify-center items-center inset-0 bg-white/55">
+        <div className="absolute flex justify-center items-center inset-0 bg-white/55 dark:bg-gray-800/55">
           <Spinner />
         </div>
       )}

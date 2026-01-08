@@ -63,7 +63,7 @@ export default function UploadPhoto({ callback }) {
   }
 
   return (
-    <div className="relative w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 translate-y-[40%]">
+    <div className="relative w-full max-w-full md:max-w-md mx-auto bg-white  rounded-2xl shadow-xl p-4 md:p-6 translate-y-[10%] md:translate-y-[40%]">
       <h2 className="text-xl font-bold text-center mb-4 text-gray-700">
         Upload Profile Photo
       </h2>

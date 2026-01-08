@@ -9,12 +9,14 @@ import Register from "./Page/Register"
 import Login from "./Page/Login"
 import ProductedRoute from "./Page/ProductedRoute"
 import AuthProductedRoute from "./Page/AuthProductedRoute"
+import TestHook from "./Page/TestHook"
 
 const router = createBrowserRouter([
   {path: '' , element: <MainLayout/>, children: [
     {index: true , element: <ProductedRoute><FeedPage/></ProductedRoute>},
     {path: 'profile' , element: <ProductedRoute><ProfileDetailsPage/></ProductedRoute>},
     {path: 'post-details/:id' , element: <ProductedRoute><PostDetailsPage/></ProductedRoute>},
+    {path: 'test-hook' , element: <ProductedRoute><TestHook/></ProductedRoute>},
     {path: '*' , element: <NotFoundPage/>}
   ]},
   {path: '' , element: <AuthLayout/> , children:[

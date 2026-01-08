@@ -57,27 +57,27 @@ export default function Register() {
 
   return (
     <>
-      <div className="bg-white shadow-2xl py-10 px-6 min-w-md">
-      <h2 className="text-2xl mb-4 text-center">Register Now</h2>
+      <div className="bg-white dark:bg-gray-800 shadow-2xl py-10 px-6 min-w-md rounded-lg">
+      <h2 className="text-2xl mb-4 text-center text-gray-900 dark:text-white">Register Now</h2>
       
         <form onSubmit={handleSubmit(signUp)} className="flex flex-col gap-6">
           
-         <Input isInvalid={errors.name} errorMessage={errors.name?.message} variant="bordered" label="Name" {...register('name' , {required : 'Name is Required' }) } type="text" />
+         <Input isInvalid={errors.name} errorMessage={errors.name?.message} variant="bordered" label="Name" {...register('name' , {required : 'Name is Required' }) } type="text" className="dark:bg-gray-700" />
 
 
-         <Input isInvalid={errors.email} errorMessage={errors.email?.message} variant="bordered" label="Email" {...register('email')} type="email" />
+         <Input isInvalid={errors.email} errorMessage={errors.email?.message} variant="bordered" label="Email" {...register('email')} type="email" className="dark:bg-gray-700" />
 
 
-         <Input isInvalid={errors.password} errorMessage={errors.password?.message} variant="bordered" label="Password" {...register('password')} type="password" />
+         <Input isInvalid={errors.password} errorMessage={errors.password?.message} variant="bordered" label="Password" {...register('password')} type="password" className="dark:bg-gray-700" />
 
 
-         <Input isInvalid={errors.rePassword} errorMessage={errors.rePassword?.message} variant="bordered" label="rePassword" {...register('rePassword')} type="password" />
+         <Input isInvalid={errors.rePassword} errorMessage={errors.rePassword?.message} variant="bordered" label="rePassword" {...register('rePassword')} type="password" className="dark:bg-gray-700" />
 
 
         <div className="flex gap-4">
- <Input isInvalid={errors.dateOfBirth} errorMessage={errors.dateOfBirth?.message} variant="bordered" label="DateOfBirth" {...register('dateOfBirth')} type="date" />
+ <Input isInvalid={errors.dateOfBirth} errorMessage={errors.dateOfBirth?.message} variant="bordered" label="DateOfBirth" {...register('dateOfBirth')} type="date" className="dark:bg-gray-700" />
          
-         <Select isInvalid={errors.gender} errorMessage={errors.gender?.message}  variant="bordered" {...register('gender')} label="Select Your Gender">
+         <Select isInvalid={errors.gender} errorMessage={errors.gender?.message}  variant="bordered" {...register('gender')} label="Select Your Gender" className="dark:bg-gray-700">
         
           <SelectItem key={'male'}>Male</SelectItem>
           <SelectItem key={'feMale'}>feMale</SelectItem>
@@ -86,9 +86,9 @@ export default function Register() {
 
         </div>
         <Button isLoading={loading} type="submit">Register</Button>
-              <div>if you haven't account please, <Link to={'/login'} className='text-blue-500 hover:text-blue-800 hover:duration-500'>Sign in</Link></div>
+              <div className="dark:text-gray-300">if you haven't account please, <Link to={'/login'} className='text-blue-500 hover:text-blue-800 dark:hover:text-blue-400 hover:duration-500'>Sign in</Link></div>
 
-        {apiError && <span className="text-center text-red-500"> {apiError} </span>}
+        {apiError && <span className="text-center text-red-500 dark:text-red-400"> {apiError} </span>}
         </form>
         
         </div> 

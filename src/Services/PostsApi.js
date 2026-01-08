@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export async function getPostsApi() {
-    try{
-        const {data} = await axios.get(`https://linked-posts.routemisr.com/posts` , {
+export function getPostsApi() {
+    
+        return  axios.get(`https://linked-posts.routemisr.com/posts` , {
             headers: {
                 token: localStorage.getItem('token')
             }, 
@@ -12,14 +12,10 @@ export async function getPostsApi() {
 
             }
         })
-        console.log(data);
-        return data
         
-}catch(err){
-    console.log(err);
-    
+        
 }
-}
+
 
 export async function getSinglePost(postId ,) {
     

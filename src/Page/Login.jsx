@@ -42,17 +42,17 @@ async  function Login(userData) {
   }
   return <>
 
-    <div className="bg-white shadow-2xl min-w-md py-7 px-6">
-      <h2 className='text-center mb-4 text-2xl'>Login Now</h2>
+    <div className="bg-white dark:bg-gray-800 shadow-2xl min-w-md py-7 px-6 rounded-lg">
+      <h2 className='text-center mb-4 text-2xl text-gray-900 dark:text-white'>Login Now</h2>
       <form onSubmit={handleSubmit(Login)} className='flex flex-col gap-4'>
 
-          <Input variant='bordered' isInvalid={Boolean(errors.email)} errorMessage={errors.email?.message} {...register('email')} label="Email" type="email" />
+          <Input variant='bordered' isInvalid={Boolean(errors.email)} errorMessage={errors.email?.message} {...register('email')} label="Email" type="email" className="dark:bg-gray-700" />
        
-          <Input  variant='bordered' isInvalid={Boolean(errors.password)} errorMessage={errors.password?.message} {...register('password')} label="Password" type="password" />
+          <Input  variant='bordered' isInvalid={Boolean(errors.password)} errorMessage={errors.password?.message} {...register('password')} label="Password" type="password" className="dark:bg-gray-700" />
 
       <Button isLoading={loading} type='submit' color="default">Login</Button>
-      <div>if you haven't account please, <Link to={'/register'} className='text-blue-500 hover:text-blue-800 hover:duration-500'>Sign Up</Link></div>
-        {apiError && <span className='text-center text-red-500'> {apiError} </span>}
+      <div className="dark:text-gray-300">if you haven't account please, <Link to={'/register'} className='text-blue-500 hover:text-blue-800 dark:hover:text-blue-400 hover:duration-500'>Sign Up</Link></div>
+        {apiError && <span className='text-center text-red-500 dark:text-red-400'> {apiError} </span>}
       </form>
     </div>
 

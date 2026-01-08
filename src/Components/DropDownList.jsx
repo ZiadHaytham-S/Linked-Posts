@@ -1,6 +1,6 @@
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Spinner } from '@heroui/react'
 import React, { useState } from 'react'
-import { deleteCommentApi } from '../Services/commentService'
+import { deleteCommentApi, updateCommentApi } from '../Services/commentService'
 import { deletePostApi } from '../Services/PostsApi'
 
 

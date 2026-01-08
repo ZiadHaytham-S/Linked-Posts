@@ -1,9 +1,8 @@
 import axios from "axios";
 
-export async function getComment(postId,commmentContent) {
+export  function getComment(postId,commmentContent) {
 
-   try{
-     const {data} = await axios.post(`https://linked-posts.routemisr.com/comments` , {
+    return axios.post(`https://linked-posts.routemisr.com/comments` , {
         content : commmentContent,
         post : postId
     }, {
@@ -11,13 +10,6 @@ export async function getComment(postId,commmentContent) {
             token : localStorage.getItem('token')
         }
     })
-    console.log(data);
-    return data
-
-   } catch(err) {
-    console.log(err);
-    
-   }
     
     
 }

@@ -1,27 +1,43 @@
-import * as zod from 'zod'
+import * as zod from 'zod';
 
+export const schema = zod
+  .object({
+    name: zod
+      .string()
+      .nonempty('Name is required')
+      .min(3, 'Name must be at least 3 characters')
+      .max(20, 'Name must be at most 20 characters'),
 
-export const schema = zod.object({
+    email: zod
+      .string()
+      .nonempty('Email is required')
+      .regex(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        'Invalid email format'
+      ),
 
-  name: zod.string().nonempty('Name is Requried').min(3 , 'Name Must Be At Least 3 Characters').max(20, 'Name Must Be At Must 20 Characters'),
+    password: zod
+      .string()
+      .nonempty('Password is required')
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        'Password must contain at least 8 characters, including uppercase, lowercase, number, and special character'
+      ),
 
-  email: zod.string().nonempty('Email Is Requried')
-          .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ , `Email Is Required`),
+    rePassword: zod.string().nonempty('Confirm Password is required'),
 
-  password: zod.string().nonempty('Password Is Requried')
-          .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ , `BLA BLA`),
-  rePassword: zod.string().nonempty('rePassword is Required')        , 
+    dateOfBirth: zod.coerce
+      .date()
+      .refine((value) => {
+        const now = new Date().getFullYear();
+        const birthYear = value.getFullYear();
+        const age = now - birthYear;
+        return age >= 18;
+      }, 'You must be at least 18 years old'),
 
-  dateOfBirth: zod.coerce.date('Select Your Age')
-    .refine((value)=> {
-
-      const userAge = value.getFullYear()
-      const Now = new Date().getFullYear()
-      const age = Now - userAge
-      return age >= 18 
-    } , 'Hello Enta So8er') , 
-
-
-    gender: zod.string().nonempty('Select Your Gender')
-
-}).refine((data)=> data.rePassword === data.password , {path: ['rePassword'] , message : 'RePassword Not Match'} );
+    gender: zod.string().nonempty('Select your gender'),
+  })
+  .refine((data) => data.rePassword === data.password, {
+    path: ['rePassword'],
+    message: 'Passwords do not match',
+  });

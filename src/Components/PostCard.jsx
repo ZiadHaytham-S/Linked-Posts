@@ -9,35 +9,50 @@ import { getComment, getPostCommentsApi } from '../Services/commentService'
 import { AuthContext } from '../Contexts/AuthContext'
 import DropDownList from './DropDownList'
 import CreatePost from './CreatePost'
+import { useMutation } from '@tanstack/react-query'
+import { queryClient } from '../main'
 
 
 export default function PostCard({post , commentLimit , callback}) {
 
   const [commentContent, setCommentContent] = useState('')
-  const [Loading, setLoading] = useState(false)
+  // const [Loading, setLoading] = useState(false)
   const [comment, setComment] = useState(post.comments)
   const [isUpdating, setIsUpdating] = useState(false)
 
  const {userData} = useContext(AuthContext)
   
-  async function createComment(e) {
+  // async function createComment(e) {
 
-    e.preventDefault();
-    setLoading(true)
-      const response = await getComment(post.id, commentContent);
+  //   e.preventDefault();
+  //   setLoading(true)
+  //     const response = await getComment(post.id, commentContent);
       
 
-      if (response.message) {
-          setComment(response.comments)
-        // await callback()
-        setCommentContent('')
+  //     if (response.message) {
+  //         setComment(response.comments)
+  //       // await callback()
+  //       setCommentContent('')
+  //     }
+      
+  //   setLoading(false)
+
+  // }
+
+    let {mutate : createComment , isPending} = useMutation({
+      mutationKey : ['create-comment'],
+      mutationFn : () => getComment(post.id , commentContent),
+      onSuccess:async (data)=> {
+        setCommentContent('');
+        setComment(data?.data.comments)
+        await queryClient.invalidateQueries(['posts'])
+       
       }
       
-    setLoading(false)
+      
 
-  }
-
-
+    })
+    
 
   async function getPostComments() {
       const response =await  getPostCommentsApi(post.id);
@@ -48,7 +63,7 @@ export default function PostCard({post , commentLimit , callback}) {
   return <>
 
 {isUpdating ? <CreatePost callback={callback} isUpdating={isUpdating} setIsUpdating={setIsUpdating} post={post}/> : 
-<div className="bg-white w-full rounded-md shadow-md h-auto py-3 px-3 my-5 overflow-hidden">
+<div className="bg-white dark:bg-gray-800 w-full rounded-md shadow-md h-auto py-3 px-3 my-5 overflow-hidden">
     <div className="w-full h-16  items-center flex justify-between ">
      
        <CardPostHeader photo={post.user.photo} name={post.user.name} date={post.createdAt}/>
@@ -57,12 +72,12 @@ export default function PostCard({post , commentLimit , callback}) {
 </div>
   <CardPostBody body={post.body} image={post.image}/>
     <CardPostFooter postId={post.id} commentsNumber={comment.length}/>
-     <form onSubmit={createComment} className='flex gap-4 mb-4' >
+     <div  className='flex gap-4 mb-4' >
 
-       <Input value={commentContent} onChange={(e)=> setCommentContent(e.target.value)}  variant='bordered' placeholder='Comment....'/>
-      <Button isLoading={Loading} type='submit' disabled={commentContent.length < 2 }  color='primary'>Add Comment</Button>
+       <Input value={commentContent} onChange={(e)=> setCommentContent(e.target.value)}  variant='bordered' className='dark:bg-gray-700 dark:text-white' placeholder='Comment....'/>
+      <Button onPress={createComment} isLoading={isPending} type='submit' disabled={commentContent.length < 2 }  color='primary'>Add Comment</Button>
 
-     </form>
+     </div>
       {comment.length > 0 && 
        comment.slice(0,commentLimit).map((comment)=> 
        <Comment setComment={setComment}  callback={getPostComments} postUserId={post.user._id} comment={comment} key={comment._id}/>)}
